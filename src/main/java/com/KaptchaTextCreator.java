@@ -18,14 +18,15 @@ public class KaptchaTextCreator extends DefaultTextCreator {
         Random random = new SecureRandom();
         int x = random.nextInt(10);
         int y = random.nextInt(10);
+        int z = random.nextInt(10);
         StringBuilder suChinese = new StringBuilder();
-        int randomoperands = (int) Math.round(Math.random() * 2);
-        if (randomoperands == 0) {
+        int randomOperands = (int) Math.round(Math.random() * 3);
+        if (randomOperands == 0) {
             result = x * y;
             suChinese.append(CNUMBERS[x]);
             suChinese.append("*");
             suChinese.append(CNUMBERS[y]);
-        } else if (randomoperands == 1) {
+        } else if (randomOperands == 1) {
             if (!(x == 0) && y % x == 0) {
                 result = y / x;
                 suChinese.append(CNUMBERS[y]);
@@ -37,7 +38,7 @@ public class KaptchaTextCreator extends DefaultTextCreator {
                 suChinese.append("+");
                 suChinese.append(CNUMBERS[y]);
             }
-        } else if (randomoperands == 2) {
+        } else if (randomOperands == 2) {
             if (x >= y) {
                 result = x - y;
                 suChinese.append(CNUMBERS[x]);
@@ -50,12 +51,12 @@ public class KaptchaTextCreator extends DefaultTextCreator {
                 suChinese.append(CNUMBERS[x]);
             }
         } else {
-            result = x + y;
+            result = 100 * x + 10 * y  + z;
             suChinese.append(CNUMBERS[x]);
-            suChinese.append("+");
             suChinese.append(CNUMBERS[y]);
+            suChinese.append(CNUMBERS[z]);
         }
-        suChinese.append("=?@" + result);
+        suChinese.append("=?@").append(result);
         return suChinese.toString();
     }
 }
